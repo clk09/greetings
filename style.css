@@ -256,55 +256,43 @@ html, body {
   transition: transform 0.6s 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-/* ---------- Bouquet of Tulips ---------- */
+/* ---------- Bouquet of Tulips (Image) ---------- */
 .bouquet {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
-  height: 280px;
+  width: 300px;       /* Adjust size here if needed */
   pointer-events: none;
-  z-index: 0;
+  z-index: 0;         /* Stays behind the envelope */
 }
 
-.bouquet svg {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 60px;
+.bouquet-img {
+  width: 100%;
   height: auto;
   opacity: 0;
-  transform-origin: bottom center;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+  transform: scale(0) translateY(40px);
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
+  
+  /* This blend mode magically hides the white background of your image! */
+  mix-blend-mode: multiply; 
 }
 
 /* 
-  CSS :has() logic:
   When the envelope is closed (not open, not closing), 
-  grow and fade in the bouquet.
+  the bouquet pops up.
 */
-.scene:has(.envelope:not(.open):not(.closing)) .bouquet .t-center {
-  animation: bloomCenter 0.8s 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-.scene:has(.envelope:not(.open):not(.closing)) .bouquet .t-left {
-  animation: bloomLeft 0.8s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-.scene:has(.envelope:not(.open):not(.closing)) .bouquet .t-right {
-  animation: bloomRight 0.8s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.scene:has(.envelope:not(.open):not(.closing)) .bouquet-img {
+  animation: bloomBouquet 1.2s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes bloomCenter {
-  0%   { opacity: 0; transform: translateX(-50%) scale(0) translateY(20px); }
-  100% { opacity: 1; transform: translateX(-50%) scale(1.2) translateY(0); }
-}
-
-@keyframes bloomLeft {
-  0%   { opacity: 0; transform: translateX(-50%) rotate(-40deg) scale(0); }
-  100% { opacity: 1; transform: translateX(-110%) rotate(-20deg) scale(1); }
-}
-
-@keyframes bloomRight {
-  0%   { opacity: 0; transform: translateX(-50%) rotate(40deg) scale(0); }
-  100% { opacity: 1; transform: translateX(10%) rotate(20deg) scale(1); }
+@keyframes bloomBouquet {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.3) translateY(50px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
 }
