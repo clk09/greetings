@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You 🌷</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Falling petals layer -->
+  <div id="petals" aria-hidden="true"></div>
+
+  <!-- Envelope scene -->
+  <main class="scene">
+
+    <div class="envelope" id="envelope" role="button" tabindex="0"
+         aria-label="Tap the middle of the envelope to open">
+
+      <!-- Back of envelope -->
+      <div class="env-back"></div>
+
+      <!-- Letter card (slides out) -->
+      <div class="letter-card" id="letterCard">
+        <div class="letter-inner">
+          <p class="letter-to">To: <span class="placeholder">[Partner Name]</span></p>
+          <p class="letter-body" id="letterBody">
+            Loading your letter…
+          </p>
+          <p class="letter-from">From: <span class="placeholder">[Your Name]</span></p>
+        </div>
+      </div>
+
+      <!-- Front flaps -->
+      <div class="env-front">
+        <div class="flap-left"></div>
+        <div class="flap-right"></div>
+        <div class="flap-bottom"></div>
+        <div class="flap-top" id="flapTop"></div>
+      </div>
+
+      <!-- Tulip accent -->
+      <div class="tulip">
+        <svg viewBox="0 0 64 96" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 12 C22 4 12 10 14 24 C16 38 26 44 32 50 C38 44 48 38 50 24 C52 10 42 4 32 12 Z"
+                fill="#c1121f"/>
+          <path d="M32 12 C28 20 28 36 32 50 C36 36 36 20 32 12 Z"
+                fill="#9d0a15" opacity="0.5"/>
+          <rect x="30" y="50" width="4" height="38" rx="2" fill="#2b2b2b"/>
+          <path d="M32 64 C20 62 14 70 16 78 C24 76 30 72 32 64 Z" fill="#2b2b2b"/>
+          <path d="M32 72 C44 70 50 78 48 86 C40 84 34 80 32 72 Z" fill="#2b2b2b"/>
+        </svg>
+      </div>
+
+      <p class="hint" id="hint">tap the middle to open</p>
+    </div>
+
+  </main>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
