@@ -1,6 +1,6 @@
 // ---- Fill these in after creating your Supabase project ----
-const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+const SUPABASE_URL = "https://kelosevkkbgjzsijcfaw.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_2nlADIkQnXylCkdXBRXgRg_Hh0DT5Ie";
 
 // Create client (SDK loaded globally from CDN in index.html)
 const supabaseClient = window.supabase.createClient(
