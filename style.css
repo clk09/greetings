@@ -260,12 +260,12 @@ html, body {
 /* ---------- Bouquet of Tulips (Image) ---------- */
 .bouquet {
   position: absolute;
-  top: 42%;
+  top: 35%; /* Positioned slightly higher */
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;         /* Made it smaller so it fits nicely */
+  width: 320px; 
   pointer-events: none;
-  z-index: -1;          /* Forces it to sit BEHIND the envelope */
+  z-index: 1; /* Puts it behind the letter, but in front of the dark screen */
 }
 
 .bouquet-img {
@@ -273,23 +273,26 @@ html, body {
   height: auto;
   opacity: 0;
   transform: scale(0) translateY(40px);
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); /* Adds a nice 3D shadow */
-  
-  /* Removed the mix-blend-mode since we are using a transparent image now */
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9)); 
 }
 
-/* When the envelope is closed, the bouquet pops up */
-.scene:has(.envelope:not(.open):not(.closing)) .bouquet-img {
-  animation: bloomBouquet 1.2s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+/* We add the ".show" class using JavaScript */
+.bouquet.show .bouquet-img {
+  animation: bloomBouquet 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes bloomBouquet {
-  0% { 
-    opacity: 0; 
-    transform: scale(0.3) translateY(50px); 
-  }
-  100% { 
-    opacity: 1; 
-    transform: scale(1) translateY(0); 
-  }
+  0% { opacity: 0; transform: scale(0.3) translateY(50px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Make the envelope slightly see-through so we can see the flowers behind it! */
+.env-back {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 43, 43, 0.85); /* Glass effect */
+  backdrop-filter: blur(2px);        /* Blurs the flowers slightly behind it */
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+  z-index: 2;
 }
