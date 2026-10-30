@@ -64,21 +64,27 @@ function openEnvelope() {
 function closeEnvelope() {
   if (!isOpen) return;
   
-  // 1. Add closing class to trigger reverse animations
   envelope.classList.add("closing");
   
-  // 2. Remove classes after animation finishes
   setTimeout(() => {
     envelope.classList.remove("open");
     envelope.classList.remove("closing");
     isOpen = false;
-  }, 1100); // 1.1s matches the letter slide-out + flap close time
+  }, 1100);
 }
 
-// Tap the middle of the envelope to open
-envelope.addEventListener("click", (e) => {
-  if (isOpen) return; // ignore clicks if already open
+// 1. CLICK LISTENER FOR THE CLOSE BUTTON
+closeBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation(); // Stops the click from bubbling to the envelope!
+  closeEnvelope();
+});
 
+// 2. CLICK LISTENER FOR THE ENVELOPE (OPENING)
+envelope.addEventListener("click", (e) => {
+  if (isOpen) return; // Ignore clicks if already open
+
+  // Check if tapped in the middle
   const rect = envelope.getBoundingClientRect();
   const x = (e.clientX - rect.left) / rect.width;
   const y = (e.clientY - rect.top) / rect.height;
@@ -87,13 +93,7 @@ envelope.addEventListener("click", (e) => {
   if (inMiddle) openEnvelope();
 });
 
-// Close button logic
-closeBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // prevent envelope click event from firing
-  closeEnvelope();
-});
-
-// Accessibility
+// 3. Keyboard Accessibility
 envelope.addEventListener("keydown", (e) => {
   if ((e.key === "Enter" || e.key === " ") && !isOpen) {
     e.preventDefault();
@@ -113,22 +113,5 @@ envelope.addEventListener("keydown", (e) => {
   } catch (err) {
     console.error(err);
     letterBody.textContent = "[could not load letter — check console]";
-  }
-})();
-
-/* ---------- Load letter from Supabase ---------- */
-(async function loadLetter() {
-  try {
-    const content = await fetchLetter();
-    if (content) {
-      letterBody.textContent = content;
-    } else {
-      letterBody.textContent =
-        "[letter not found — check your Supabase table / keys]";
-    }
-  } catch (err) {
-    console.error(err);
-    letterBody.textContent =
-      "[could not load letter — check console]";
   }
 })();
