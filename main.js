@@ -61,16 +61,24 @@ function openEnvelope() {
   envelope.classList.add("open");
 }
 
+const bouquet = document.getElementById("bouquet");
+
 function closeEnvelope() {
   if (!isOpen) return;
   
   envelope.classList.add("closing");
   
+  // Hide bouquet while the letter is sliding back in
+  bouquet.classList.remove("show");
+  
   setTimeout(() => {
     envelope.classList.remove("open");
     envelope.classList.remove("closing");
     isOpen = false;
-  }, 1100);
+    
+    // TRIGGER THE BOUQUET TO BLOOM after the envelope closes!
+    bouquet.classList.add("show");
+  }, 1100); 
 }
 
 // 1. CLICK LISTENER FOR THE CLOSE BUTTON
